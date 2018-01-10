@@ -59,9 +59,6 @@ public class JcifListingEngine extends ListingEngine {
         mListingThread = new JcifListingThread();
     }
 
-    static {
-        Security.addProvider(new org.spongycastle.jce.provider.BouncyCastleProvider());
-    }
 
     @Override
     public void start() {
