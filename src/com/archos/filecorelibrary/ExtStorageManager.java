@@ -66,6 +66,7 @@ public class ExtStorageManager {
                                     Intent intent = new Intent();
                                     intent.setData(Uri.parse(ExtStorageReceiver.ARCHOS_FILE_SCHEME+"://none"));
                                     intent.setAction(ExtStorageReceiver.ACTION_MEDIA_CHANGED);
+                                    intent.setPackage(ArchosUtils.getGlobalContext().getPackageName());
                                     ArchosUtils.getGlobalContext().sendBroadcast(intent);
                                     return 1;
                                 }
@@ -130,10 +131,16 @@ public class ExtStorageManager {
 
             @SuppressWarnings("rawtypes")
             Class ServiceManager = cl.loadClass("android.os.ServiceManager");
-            Class IMountService = cl.loadClass("android.os.storage.IMountService");
-            Class Stub = cl.loadClass("android.os.storage.IMountService$Stub");
+            Class IMountService;
+            Class Stub;
+             if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+                IMountService = cl.loadClass("android.os.storage.IStorageManager");
+                Stub = cl.loadClass("android.os.storage.IStorageManager$Stub");
+            }else{
+                IMountService = cl.loadClass("android.os.storage.IMountService");
+                Stub = cl.loadClass("android.os.storage.IMountService$Stub");
+            }
             Class StorageVolume = cl.loadClass("android.os.storage.StorageVolume");
-
             Class VolumeInfo = null;
             Class DiskInfo = null;
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
