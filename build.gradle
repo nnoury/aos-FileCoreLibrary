@@ -57,8 +57,7 @@ android {
 
 dependencies {
     implementation files('libs/jakarta-oro-2.0.1.jar')
-    api files('libs/jcifs-ng-2.1.0-SNAPSHOT.jar')
-//    implementation 'eu.agno3.jcifs:jcifs-ng:2.0.4'
+    api 'eu.agno3.jcifs:jcifs-ng:2.1.0'
     implementation'org.bouncycastle:bcprov-jdk15on:1.59'
 
     implementation 'com.android.support:appcompat-v7:27.0.2'
